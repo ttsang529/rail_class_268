@@ -14,7 +14,8 @@ class PostsController < ApplicationController
 
   def create
     post = Post.new(post_params)
-    post.user = current_user
+    #binding.pry
+    #User.name = :name
 
     if post.save!
       redirect_to posts_path
@@ -24,7 +25,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    binding.pry
+    #binding.pry
     params.require(:post).permit(:title, :content, category_ids: [])
   end
 
