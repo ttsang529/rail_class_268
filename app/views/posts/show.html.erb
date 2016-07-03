@@ -1,0 +1,24 @@
+<%# views/posts/show.html.erb%>
+
+<% @user.posts.each do |post| %>
+<div class= "row">
+  <div class="col-md-8 well">
+    <%= render 'shared/title', title:"#{@post.title}"%>
+    <p>
+      <%= @post.content%>
+    </p>
+  </div>
+</div>
+<% end %>
+
+<% @post.comments.each do |comment|%>
+  <div class="col-md-6 well">
+    <p>
+      <%= comment.content%>
+    </p>
+    <br>
+    <small>commented by </small><%= "#{comment.user.name}" %>
+  </div>
+<% end %>
+
+<%= link_to 'go back to all posts', posts_path %>
