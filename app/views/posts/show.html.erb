@@ -1,6 +1,4 @@
 <%# views/posts/show.html.erb%>
-
-<% @user.posts.each do |post| %>
 <div class= "row">
   <div class="col-md-8 well">
     <%= render 'shared/title', title:"#{@post.title}"%>
@@ -9,7 +7,7 @@
     </p>
   </div>
 </div>
-<% end %>
+
 
 <% @post.comments.each do |comment|%>
   <div class="col-md-6 well">
