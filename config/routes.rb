@@ -16,7 +16,7 @@ Rails.application.routes.draw do
    get '/logout', to: 'sessions#destroy'
   resources :posts
   resources :users, only: [ :create, :show]
-  resources :categories, only: [:index, :new, :create]
+  resources :categories, only: [:index, :new, :create,:destroy,:update,:edit]
 
   resources :posts do 
     resources :comments 
