@@ -6,7 +6,21 @@ Rails.application.routes.draw do
   # root 'welcome#index'
   #get 'posts' => 'posts#index'
   #get 'posts/:id' => 'posts#show'
+    root 'posts#index'
+
+  # Example of regular route:
+  #   get 'products/:id' => 'catalog#view'
+  get '/register', to: 'users#new'
+   get '/login', to: 'sessions#new'
+   post '/login', to: 'sessions#create'
+   get '/logout', to: 'sessions#destroy'
   resources :posts
+  resources :users, only: [ :create, :show]
+  resources :categories, only: [:index, :new, :create]
+
+  resources :posts do 
+    resources :comments 
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

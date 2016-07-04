@@ -1,6 +1,11 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.all
+=begin
+    @posts.each do |post|
+      logger.info(post.title)     
+    end
+=end    
   end
 
   def show
@@ -10,12 +15,16 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    #@user = User.new
   end
 
   def create
     post = Post.new(post_params)
+    #user = User.new(user_params)
+
     #binding.pry
-    #User.name = :name
+    
+
 
     if post.save!
       redirect_to posts_path
@@ -24,9 +33,11 @@ class PostsController < ApplicationController
     end
   end
 
-  def post_params
+
+  def post_paramss
     #binding.pry
     params.require(:post).permit(:title, :content, category_ids: [])
+   
   end
 
 end

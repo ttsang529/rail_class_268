@@ -2,13 +2,14 @@
 
 <%#= views/posts/index.html.erb
 %>
-
+ <%logger.info(@post) %>
 <% @posts.each do |post| %>
   <div class="row">
    <%#<button type="button" class="btn btn-link" href=new_post_path>Link</button>
    %>
     <div class="well col-md-6">
       <p>
+
         <h4><%= post.title %></h4>
       </p>
       <p>
