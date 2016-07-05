@@ -1,24 +1,31 @@
-<%= render 'shared/title', title: 'Post List Yay!!!'%>
+<%= render 'shared/title', title: 'Post List !!!'%>
 
 <%#= views/posts/index.html.erb
 %>
- <%logger.info(@post) %>
+
 <% @posts.each do |post| %>
   <div class="row">
    <%#<button type="button" class="btn btn-link" href=new_post_path>Link</button>
    %>
-    <div class="well col-md-6">
-      <p>
 
+    <div class="well well-sm col-md-6">
+      <p>
+        <%= render partial: "categories/category", collection: post.categories %>
         <h4><%= post.title %></h4>
       </p>
-      <p>
+
+      <p class="text-warning">
         <%= post.content %>
       </p>
+
       <br>
-      <span>
-        <%= link_to "show this post", post_path(post)%>
-      </span>
+      <% if logged_in? %>
+        <span>
+          <%= link_to '<button type="submit" class= "btn btn-info">Show</button>'.html_safe,post_path(post) %>
+          <%= link_to '<button type="submit" class= "btn btn-warning">Delete</button>'.html_safe,post_path(post) , method: :delete%>
+          <%= link_to '<button type="submit" class= "btn btn-primary">Update</button>'.html_safe,edit_post_path(post) %>
+        </span>
+      <% end %>
     </div>
   </div>
 <% end %>

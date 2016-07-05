@@ -3,9 +3,7 @@
 <% @categories.each do |category| %>
 <div class='row'>
   <div class='well col-md-6'>
-    <p><%= category.title %></p>w
-  </div>
-    <div class='well col-md-2'>
+    <p><%= category.title %></p>
     <%= link_to '<button type="submit" class="btn btn-default"">Delete</button>'.html_safe,category_path(category) , method: :delete%>
     <%= link_to '<button type="submit" class="btn btn-default"">Update</button>'.html_safe,edit_category_path(category) %>
   </div>

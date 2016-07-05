@@ -1,27 +1,46 @@
 <%# views/posts/show.html.erb%>
-<div class= "row">
+<%= render 'shared/title', title: "#{@post.title}"%>
+<div class="row">
   <div class="col-md-8 well">
-    <%= render 'shared/title', title:"#{@post.title}"%>
+    <%= render partial: "categories/category", collection: @post.categories %>
+    <h4><%= @post.title %></h4>
+    <br>
     <p>
-      <%= @post.content%>
+      <%= @post.content %>
     </p>
+    <br>
+    <small class='badge progress-bar-warning'>posted by </small> <span  class='badge alert-success'><%= " #{@post.user.name}" %></span>
   </div>
 </div>
 
 
-<% @post.comments.each do |comment|%>
+<h4>All Comments:</h4>
+
+<% @post.comments.each do |comment| %>
   <div class="row">
-  <div class="col-md-6 well">
-    <p>
-      <%= comment.content%>
-    </p>
-    <br>
-    <small>commented by </small><%= "#{comment.user.name}" %>
+    <div class="col-md-6 well  well-sm">
+      <p>
+        <%= comment.content %>
+      </p>
+      <small  class='badge progress-bar-info' >commented by </small> <span class='badge alert-success'><%= "#{comment.user.name}" %></span>
     </div>
-   </div>
+  </div>
 <% end %>
 
+<% if logged_in? %>
 
+  <h4>Leave a comment:</h4>
+  <%= form_for [@post, @comment] do |f| %>
+    <div class="row">
+      <%= f.text_area :content, rows: 3, class: 'col-md-4' %>
+      <div class="col-md-2">
+        <%= f.submit 'Create Comment', class: 'btn btn-primary' %>
+      </div>
+    </div>
+    <br>
+  <% end %>
+
+<% end %>
 
 <hr>
 
