@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all
+    #@posts = Post.all
+    @posts= Post.all.sort_by{|x| x.total_votes }.reverse
 =begin
     @posts.each do |post|
       logger.info(post.title)     
@@ -61,4 +62,16 @@ class PostsController < ApplicationController
    
   end
 
+   def vote
+    @post = Post.find(params[:id])
+    @vote = Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
+
+    if @vote.valid?
+      flash[:success] = 'Your vote was counted!'
+    else
+      flash[:error] = "You can only vote for #{@post.title} once!"
+    end
+
+    redirect_to :back
+  end
 end
